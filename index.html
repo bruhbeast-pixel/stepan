@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Stepanek Nuke</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: black;
+      color: white;
+      text-align: center;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+
+    h1 {
+      font-size: 2.5em;
+    }
+
+    #countdown {
+      font-size: 2em;
+      margin-top: 10px;
+    }
+
+    img {
+      margin-top: 20px;
+      width: 200px;
+    }
+
+    #notice {
+      margin-top: 20px;
+      color: gray;
+      font-size: 1em;
+    }
+  </style>
+</head>
+<body>
+  <h1 id="title">Countdown to Stepanek Nuke</h1>
+  <div id="countdown"></div>
+  <p id="notice">...</p>
+
+  <audio id="bgMusic" loop>
+    <source src="https://www.myinstants.com/media/sounds/the-only-thing-they-fear-is-you-hd.mp3" type="audio/mpeg">
+  </audio>
+
+  <script>
+    // Target: October 26, 2025, 12:00 PM GMT
+    const targetDate = new Date(Date.UTC(2025, 9, 26, 12, 0, 0));
+
+    function updateCountdown() {
+      const now = new Date();
+      const diff = targetDate - now;
+
+      const countdown = document.getElementById("countdown");
+      const title = document.getElementById("title");
+
+      if (diff <= 0) {
+        title.textContent = "Nuke Stepanek!";
+        countdown.innerHTML = `<img src="https://upload.wikimedia.org/wikipedia/en/7/73/Trollface.png" alt="Troll Face">`;
+        clearInterval(timer);
+        return;
+      }
+
+      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+      const minutes = Math.floor((diff / (1000 * 60)) % 60);
+      const seconds = Math.floor((diff / 1000) % 60);
+
+      countdown.textContent = `${days}d ${hours}h ${minutes}m ${seconds}s`;
+    }
+
+    // If time has passed
+    const now = new Date();
+    if (now >= targetDate) {
+      document.getElementById("title").textContent = "Too bad, now get a job!";
+      document.getElementById("countdown").textContent = "";
+      document.getElementById("notice").remove();
+    } else {
+      updateCountdown();
+      var timer = setInterval(updateCountdown, 1000);
+    }
+
+    // Play music after first user interaction
+    const bgMusic = document.getElementById("bgMusic");
+    const notice = document.getElementById("notice");
+
+    function startMusic() {
+      bgMusic.play().catch(() => {});
+      notice.textContent = "stfu nobody cares";
+      document.removeEventListener("click", startMusic);
+      document.removeEventListener("keydown", startMusic);
+    }
+
+    document.addEventListener("click", startMusic);
+    document.addEventListener("keydown", startMusic);
+  </script>
+</body>
+</html>
