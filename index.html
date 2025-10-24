@@ -7,7 +7,7 @@
   <style>
     body {
       font-family: Arial, sans-serif;
-      background: black;
+      background: blue;
       color: white;
       text-align: center;
       height: 100vh;
@@ -44,7 +44,7 @@
   <p id="notice">...</p>
 
   <audio id="bgMusic" loop>
-    <source src="https://www.myinstants.com/media/sounds/the-only-thing-they-fear-is-you-hd.mp3" type="audio/mpeg">
+    <source src="https://www.myinstants.com/media/sounds/clock_ticking_edited-2.mp3" type="audio/mpeg">
   </audio>
 
   <script>
@@ -90,7 +90,7 @@
 
     function startMusic() {
       bgMusic.play().catch(() => {});
-      notice.textContent = "stfu nobody cares";
+      notice.textContent = "The time has come.";
       document.removeEventListener("click", startMusic);
       document.removeEventListener("keydown", startMusic);
     }
